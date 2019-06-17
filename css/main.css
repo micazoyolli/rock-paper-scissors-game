@@ -1,107 +1,171 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html,
 body {
+  background: linear-gradient(45deg, rgba(34,183,221,1) 0%, rgba(73,171,224,1) 29%, rgba(131,153,227,1) 72%, rgba(169,142,230,1) 100%);
+  box-sizing: border-box;
+  font-family: sans-serif;
   height: 100%;
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 section {
-  background-color: rgb(0, 114, 139);
-  box-shadow: inset 28px -33px 87px 53px rgba(0, 93, 112, 1);
-  font-family: sans-serif;
-  height: 100vh;
+  height: 100%;
 }
 
-.score {
-  align-items: center;
-  color: rgb(224, 224, 224);
-  display: flex;
-  height: 20vh;
-  justify-content: space-around;
-  transition: opacity 0.5s ease 0.5s;
+button:focus {
+  outline: none;
 }
 
-.score h2 {
-  font-size: 30px;
-}
-
-.score p {
-  font-size: 25px;
-  padding: 10px;
-  text-align: center;
-}
-
+/* Intro Screen */
+.game,
 .intro {
   align-items: center;
   color: rgb(224, 224, 224);
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 100%;
   justify-content: space-around;
   transition: opacity 0.5s ease;
 }
 
 .intro .intro-hands {
-  width: 40%;
+  width: 75%;
 }
 
 .intro button {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.intro button,
-.match button {
-  background: rgb(45, 117, 96);
-  border: none;
-  border-radius: 3px;
+  background: none;
+  border: 5px solid rgb(224, 224, 224);
+  border-radius: 10px;
   color: rgb(224, 224, 224);
   cursor: pointer;
   font-size: 20px;
   height: 50px;
-  width: 150px;
+  width: 120px;
 }
 
-.match {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.5s ease 0.5s;
-}
-
-.winner {
+/* Game Screen */
+.score {
+  align-items: center;
   color: rgb(224, 224, 224);
-  font-size: 50px;
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.wrapper-player-score,
+.wrapper-computer-score {
+  display: flex;
+  position: relative;
+}
+
+.player-score,
+.computer-score {
+  align-items: center;
+  border: 5px solid #4e5b88;
+  border-radius: 50%;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  padding: 15px;
+  width: 35px;
+}
+
+.player-score img,
+.computer-score img {
+  height: 140%;
+}
+
+.score p {
+  align-items: center;
+  background: #4e5b88;
+  border-radius: 50%;
+  bottom: -20px;
+  display: flex;
+  font-size: 18px;
+  height: 10px;
+  justify-content: center;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  width: 10px;
+}
+
+.score p.winner {
+  background: #3f7f00;
+}
+
+.score p.winner::after {
+  content: '✓';
+}
+
+.score p.loser {
+  background: #7f0000;
+}
+
+.score p.loser::after {
+  content: '×';
+}
+
+.score p.tie {
+  background: #005d67;
+}
+
+.score p.tie::after {
+  content: 'ø';
+}
+
+.wrapper-computer-score p {
+  left: 0;
+}
+
+.match button {
+  border: 5px solid #687ab5;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 60px;
+  margin: 30px 5px;
+  width: 60px;
+}
+
+.match button:hover {
+  border: 5px solid #4e5b88;
+}
+
+.match button img {
+  transform: rotate(190deg);
+  width: 100%;
 }
 
 .hands,
 .options {
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.player-hand,
+.computer-hand {
+  width: 43%;
+}
+
+.computer-hand {
+  margin-left: 15px;
 }
 
 .player-hand {
+  margin-right: 15px;
   transform: rotateY(180deg);
 }
 
+p.fadeOut,
 div.fadeOut {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
+p.fadeIn,
 div.fadeIn {
-  opacity: 1;
-  pointer-events: all;
+  display: flex;
 }
 
 @keyframes shakePlayer {
@@ -161,5 +225,59 @@ div.fadeIn {
   }
   100% {
     transform: translateY(0px);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1023px) {
+  .intro .intro-hands {
+    width: 40%;
+  }
+
+  .intro button {
+    height: 60px;
+    margin: 100px 0 0 140px;
+    position: absolute;
+    width: 140px;
+  }
+
+  .game {
+    margin-top: 30px;
+  }
+
+  .score {
+    width: 80%;
+  }
+
+  .player-score,
+  .computer-score {
+    height: 100px;
+    width: 100px;
+  }
+
+  .player-score img,
+  .computer-score img {
+    height: 100%;
+  }
+
+  .score p {
+    bottom: -40px;
+    font-size: 35px;
+    height: 30px;
+    width: 30px;
+  }
+
+  .computer-hand {
+    margin-left: 50px;
+  }
+
+  .player-hand {
+    margin-right: 50px;
+  }
+
+  .match button {
+    height: 100px;
+    margin: 50px 10px;
+    width: 100px;
   }
 }

@@ -6,13 +6,11 @@ const game = () => {
   const startGame = () => {
     const playBtn = document.querySelector('.intro button');
     const introScreen = document.querySelector('.intro');
-    const scoreScreen = document.querySelector('.score');
-    const matchScreen = document.querySelector('.match');
+    const gameScreen = document.querySelector('.game');
 
     playBtn.addEventListener('click', () => {
       introScreen.classList.add('fadeOut');
-      scoreScreen.classList.add('fadeIn');
-      matchScreen.classList.add('fadeIn');
+      gameScreen.classList.add('fadeIn');
     });
   };
 
@@ -24,6 +22,8 @@ const game = () => {
     const hands = document.querySelectorAll('.hands img');
 
     hands.forEach(hand => {
+      hand.style.opacity = 0.5;
+
       hand.addEventListener('animationend', function() {
         this.style.animation = '';
       });
@@ -33,10 +33,21 @@ const game = () => {
     const computerOptions = ['rock', 'paper', 'scissors'];
 
     options.forEach(option => {
+      option.style.opacity = 1;
+
       option.addEventListener('click', function() {
         // Computer Choice
         const computerNumber = Math.floor(Math.random() * 3);
         const computerChoice = computerOptions[computerNumber];
+
+        hands.forEach(hand => {
+          hand.style.opacity = 1;
+        });
+
+        options.forEach(option => {
+          option.style.opacity = 0.5;
+          option.disabled = true;
+        });
 
         playerHand.src = './assets/rock.png';
         computerHand.src = './assets/rock.png';
@@ -56,24 +67,41 @@ const game = () => {
   };
 
   const compareHands = (playerChoice, computerChoice) => {
-    // Update Text
-    const winner = document.querySelector('.winner');
+    const pWinner = document.querySelector('.wrapper-player-score .winner');
+    const pLoser = document.querySelector('.wrapper-player-score .loser');
+    const pTie = document.querySelector('.wrapper-player-score .tie');
+    const pText = document.querySelector(
+      '.wrapper-player-score .score-text');
+    const cWinner = document.querySelector(
+      '.wrapper-computer-score .winner');
+    const cLoser = document.querySelector('.wrapper-computer-score .loser');
+    const cTie = document.querySelector('.wrapper-computer-score .tie');
+    const cText = document.querySelector(
+      '.wrapper-computer-score .score-text');
+
+    pText.classList.add('fadeOut');
+    cText.classList.add('fadeOut');
 
     // Checking for a tie
     if (playerChoice === computerChoice) {
-      winner.textContent = 'Empate!!!';
+      pTie.classList.add('fadeIn');
+      cTie.classList.add('fadeIn');
+
+      updateScore();
       return;
     }
 
     // Check for Rock
     if (playerChoice === 'rock') {
       if (computerChoice === 'scissors') {
-        winner.textContent = 'Player Wins';
+        pWinner.classList.add('fadeIn');
+        cLoser.classList.add('fadeIn');
         pScore++;
         updateScore();
         return;
       } else {
-        winner.textContent = 'Computer Wins';
+        cWinner.classList.add('fadeIn');
+        pLoser.classList.add('fadeIn');
         cScore++;
         updateScore();
         return;
@@ -83,12 +111,14 @@ const game = () => {
     // Check for Paper
     if (playerChoice === 'paper') {
       if (computerChoice === 'scissors') {
-        winner.textContent = 'Computer Wins';
+        cWinner.classList.add('fadeIn');
+        pLoser.classList.add('fadeIn');
         cScore++;
         updateScore();
         return;
       } else {
-        winner.textContent = 'Player Wins';
+        pWinner.classList.add('fadeIn');
+        cLoser.classList.add('fadeIn');
         pScore++;
         updateScore();
         return;
@@ -98,12 +128,14 @@ const game = () => {
     // Check for Scissors
     if (playerChoice === 'scissors') {
       if (computerChoice === 'rock') {
-        winner.textContent = 'Computer Wins';
+        cWinner.classList.add('fadeIn');
+        pLoser.classList.add('fadeIn');
         cScore++;
         updateScore();
         return;
       } else {
-        winner.textContent = 'Player Wins';
+        pWinner.classList.add('fadeIn');
+        cLoser.classList.add('fadeIn');
         pScore++;
         updateScore();
         return;
@@ -112,10 +144,40 @@ const game = () => {
   };
 
   const updateScore = () => {
-    const playerScore = document.querySelector('.player-score p');
-    const computerScore = document.querySelector('.computer-score p');
+    const playerActionsScore = document.querySelectorAll(
+      '.wrapper-player-score p');
+    const computerActionsScore = document.querySelectorAll(
+      '.wrapper-computer-score p');
+    const playerScore = document.querySelector(
+      '.wrapper-player-score p.score-text');
+    const computerScore = document.querySelector(
+      '.wrapper-computer-score p.score-text');
+    const options = document.querySelectorAll('.options button');
+
     playerScore.textContent = pScore;
     computerScore.textContent = cScore;
+
+    setTimeout(() => {
+      playerActionsScore.forEach(score => {
+        if (score.classList.contains('fadeIn')) {
+          score.classList.remove('fadeIn');
+        }
+      });
+
+      computerActionsScore.forEach(score => {
+        if (score.classList.contains('fadeIn')) {
+          score.classList.remove('fadeIn');
+        }
+      });
+
+      playerScore.classList.add('fadeIn');
+      computerScore.classList.add('fadeIn');
+
+      options.forEach(option => {
+        option.style.opacity = 1;
+        option.disabled = false;
+      });
+    }, 2000);
   };
 
   // Call all the inner functions

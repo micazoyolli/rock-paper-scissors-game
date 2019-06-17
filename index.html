@@ -10,33 +10,45 @@
   </head>
   <body>
     <section class="wrapper-game">
-      <div class="score fadeOut">
-        <div class="player-score">
-          <h2>Player</h2>
-          <p>0</p>
-        </div>
-        <div class="computer-score">
-          <h2>Computer</h2>
-          <p>0</p>
-        </div>
-      </div>
-
       <div class="intro">
         <img class="intro-hands" src="./assets/intro.png" alt="Rock, papel and scissors">
-        <button>Play</button>
+
+        <button>PLAY</button>
       </div>
 
-      <div class="match fadeOut">
-        <h2 class="winner">Escoge una opción</h2>
-        <div class="hands">
-          <img class="player-hand" src="./assets/rock.png" alt="Player Hand">
-          <img class="computer-hand" src="./assets/rock.png" alt="Computer Hand">
+      <div class="game fadeOut">
+        <div class="score">
+          <div class="wrapper-player-score">
+            <div class="player-score">
+              <img class="player-icon" src="./assets/player-icon.png" alt="Player">
+            </div>
+            <p class="score-text">0</p>
+            <p class="winner fadeOut"></p>
+            <p class="loser fadeOut"></p>
+            <p class="tie fadeOut"></p>
+          </div>
+          <div class="wrapper-computer-score">
+            <div class="computer-score">
+              <img class="computer-icon" src="./assets/computer-icon.png" alt="Computer">
+            </div>
+            <p class="score-text">0</p>
+            <p class="winner fadeOut"></p>
+            <p class="loser fadeOut"></p>
+            <p class="tie fadeOut"></p>
+          </div>
         </div>
 
-        <div class="options">
-          <button class="rock">Piedra</button>
-          <button class="paper">Papel</button>
-          <button class="scissors">Tijeras</button>
+        <div class="match">
+          <div class="hands">
+            <img class="player-hand" src="./assets/rock.png" alt="Player Hand">
+            <img class="computer-hand" src="./assets/rock.png" alt="Computer Hand">
+          </div>
+
+          <div class="options">
+            <button class="rock"><img src="./assets/rock.png" alt="Rock"></button>
+            <button class="paper"><img src="./assets/paper.png" alt="Paper"></button>
+            <button class="scissors"><img src="./assets/scissors.png" alt="Scissors"></button>
+          </div>
         </div>
       </div>
     </section>
