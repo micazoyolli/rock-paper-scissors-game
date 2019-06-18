@@ -49,14 +49,16 @@ const game = () => {
           option.disabled = true;
         });
 
-        playerHand.src = './assets/rock.png';
-        computerHand.src = './assets/rock.png';
+        playerHand.src = './assets/hands/rock.png';
+        computerHand.src = './assets/hands/rock.png';
 
         setTimeout(() => {
           compareHands(this.className, computerChoice);
           // Update Images
-          playerHand.src = `./assets/${this.className}.png`;
-          computerHand.src = `./assets/${computerChoice}.png`;
+          playerHand.src =
+            `./assets/hands/${this.className}.png`;
+          computerHand.src =
+            `./assets/hands/${computerChoice}.png`;
         }, 2000);
 
         // Animation
